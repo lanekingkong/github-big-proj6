@@ -1,0 +1,115 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dataflowx"
+version = "1.0.0"
+description = "DataFlowX: Intelligent Data Pipeline Orchestration Engine — AI-powered ETL, streaming, and data transformation with visual DAG editor"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "lanekingkong", email = "lanekingkong@github.com"},
+]
+keywords = [
+    "data-pipeline",
+    "etl",
+    "data-orchestration",
+    "streaming",
+    "data-transformation",
+    "dag",
+    "ai",
+    "data-engineering",
+    "workflow",
+    "data-integration",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "pydantic>=2.5.0",
+    "pyyaml>=6.0.1",
+    "click>=8.1.0",
+    "rich>=13.7.0",
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "sqlalchemy>=2.0.30",
+    "alembic>=1.13.0",
+    "httpx>=0.27.0",
+    "networkx>=3.3",
+    "celery>=5.3.0",
+    "redis>=5.0.0",
+    "apscheduler>=3.10.0",
+    "psutil>=5.9.0",
+    "tqdm>=4.66.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=5.0.0",
+    "black>=24.4.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+    "pre-commit>=3.7.0",
+    "build>=1.2.0",
+    "twine>=5.1.0",
+]
+streaming = [
+    "kafka-python>=2.0.2",
+    "confluent-kafka>=2.4.0",
+    "faust>=1.10.0",
+]
+ai = [
+    "langchain>=0.2.0",
+    "openai>=1.35.0",
+    "chromadb>=0.5.0",
+    "sentence-transformers>=2.7.0",
+]
+
+[project.scripts]
+dataflowx = "dataflowx.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/lanekingkong/dataflowx"
+Documentation = "https://github.com/lanekingkong/dataflowx/blob/main/README.md"
+Issues = "https://github.com/lanekingkong/dataflowx/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-v --tb=short --strict-markers"
